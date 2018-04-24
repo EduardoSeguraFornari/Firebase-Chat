@@ -58,7 +58,7 @@ class DataManager {
     
     }
     
-    func fetchObservable<T: CloudConvertible>(eventType: DataEventType, typeName: String, completion: @escaping (Bool, [T]?) -> Void) {
+    func fetchObservable<T: CloudConvertible>(eventType: DataEventType, typeName: String, completion: @escaping ([T]?) -> Void) {
         
         let database: DatabaseReference = Database.database().reference()
         
@@ -76,9 +76,9 @@ class DataManager {
                     }
                 }
                 result = aux.compactMap { T.init($0) } // map & remove nils
-                completion(true, result)
+                completion(result)
             } else {
-                completion(true, result)
+                completion(result)
             }
         }
         
@@ -174,6 +174,14 @@ class DataManager {
     func login(with email: String, and password: String, completion: @escaping (User?, Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             completion(user, error)
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            
         }
     }
 

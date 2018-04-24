@@ -10,9 +10,6 @@ import UIKit
 
 class ChatsViewController: UIViewController {
 
-    static let goToChatsFromCreateProfileSegue = "goToChatsFromCreateProfile"
-    static let goToChatsFromLoginSegue = "goToChatsFromLogin"
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

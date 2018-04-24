@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
             if finished {
                 if profile != nil {
                     DataAccess.currentProfile = profile
-                    self.performSegue(withIdentifier: ChatsViewController.goToChatsFromLoginSegue, sender: nil)
+                    self.performSegue(withIdentifier: UsersViewController.goToUsersFromLoginSegue, sender: nil)
                 } else {
                     self.performSegue(withIdentifier: CreateProfileViewController.goToCreateProfileFromLoginSegue, sender: nil)
                 }

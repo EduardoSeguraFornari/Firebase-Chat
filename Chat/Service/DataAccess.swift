@@ -12,19 +12,19 @@ class DataAccess {
     
     static var currentProfile: Profile?
     
-//    static func saveChatID(userID: String, chatID: String) {
-//        let usersRef: DatabaseReference = Database.database().reference()
-//        let dict = ["users/\(userID)/chatsIDs/\(chatID)": true]
-//        usersRef.updateChildValues(dict)
-//    }
+    static func saveChatID(userID: String, chatID: String) {
+        let usersRef = Database.database().reference()
+        let dict = ["users/\(userID)/chatsIDs/\(chatID)": true]
+        usersRef.updateChildValues(dict)
+    }
     
-    //MARK - CREATE
+    // MARK - CREATE
     
     static func createAccount(with email: String, and password: String, completion: @escaping (User?, Error?) -> Void) {
             DataManager.sharedInstance.createAccount(with: email, and: password, completion: completion)
     }
     
-    //MARK - LOGIN
+    // MARK - LOGIN
     
     static func login(email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
         DataManager.sharedInstance.login(with: email, and: password, completion: completion)
@@ -34,7 +34,13 @@ class DataAccess {
         return DataManager.sharedInstance.currentUser()
     }
     
-    //MARK - SAVE
+    // MARK: - LOGOUT
+    
+    static func logout() {
+        DataManager.sharedInstance.logout()
+    }
+    
+    // MARK - SAVE
     
     static func save(with profile: Profile, completion: @escaping (Error?, DatabaseReference) -> Void) {
         var profileToSave = profile
@@ -45,23 +51,7 @@ class DataAccess {
             }
             completion(error, databaseReference)
         })
-    }
-    
-//    static func save(with produto: Produto, completion: @escaping (Error?, DatabaseReference) -> Void) {
-//        var produtoToSave = produto
-//        produtoToSave.vendedorId = currentVendedor?.id
-//        DataManager.shareInstance.save(data: produtoToSave, typeName: Produto.typeName, completion: { error, databaseReference in
-//            completion(error, databaseReference)
-//        })
-//    }
-    
-//    static func save(with lance: Lance, completion: @escaping (Error?, DatabaseReference) -> Void) {
-//        var lanceToSave = lance
-//        lanceToSave.compradorId = currentVendedor?.id
-//        DataManager.shareInstance.save(data: lanceToSave, typeName: Lance.typeName, completion: { error, databaseReference in
-//            completion(error, databaseReference)
-//        })
-//    }
+    } 
     
     //MARK - DELETE
     
@@ -71,8 +61,36 @@ class DataAccess {
     
     //MARK - Fetch
     
-//    static func fetchVendedores(completion: @escaping (Bool, [Vendedor]?) -> Void) {
-//        DataManager.shareInstance.fetch(typeName: Vendedor.typeName, completion: completion)
+    static func fetchProfilesObservable(completion: @escaping ([Profile]?) -> Void) {
+        DataManager.sharedInstance.fetchObservable(eventType: DataEventType.value, typeName: Profile.typeName, completion: completion)
+    }
+    
+    static func queryChatsWith(query: DatabaseQuery, completion: @escaping (Bool, [Chat]?) -> Void) {
+        DataManager.sharedInstance.query(query: query, completion: completion)
+    }
+    
+//    static func fetchChatsObservable(completion: @escaping ([Chat]?) -> Void) {
+//
+//        let databaseReference: DatabaseReference = Database.database().reference()
+//
+//        let query1 = databaseReference.child(Chat.typeName).queryOrdered(byChild: "user1").queryEqual(toValue: currentProfile!)
+//        let query2 = databaseReference.child(Chat.typeName).queryOrdered(byChild: "user2").queryEqual(toValue: currentProfile!)
+//
+//        queryChatsWith(query: query1) { (firstQueryFinished, fistQueryChats) in
+//            if firstQueryFinished {
+//                var chats = fistQueryChats as? [Chat] != nil ? fistQueryChats! : [Chat]()
+//                queryChatsWith(query: query2) { (secondQueryFinished, secondQueryChats) in
+//                    if secondQueryFinished {
+//                        if let secondQueryChats = secondQueryChats {
+//                            chats.append(contentsOf: secondQueryChats)
+//                        }
+//                        completion(chats)
+//                    }
+//                }
+//            }
+//        }
+//
+//        DataManager.sharedInstance.fetchObservable(eventType: DataEventType.value, typeName: Chat.typeName, completion: completion)
 //    }
     
     static func fetchCurrentUserProfile(completion: @escaping (Bool, Profile?) -> Void) {
@@ -83,29 +101,5 @@ class DataAccess {
 
         DataManager.sharedInstance.queryFirst(query: query, completion: completion)
     }
-    
-//    static func fetchMeusProdutosObservable(completion: @escaping (Bool, [Produto]?) -> Void) {
-//        let databaseReference: DatabaseReference = Database.database().reference()
-//        let query = databaseReference.child(Produto.typeName).queryOrdered(byChild: "vendedorId").queryEqual(toValue: currentVendedor!.id!)
-//
-//        DataManager.shareInstance.queryObservable(query: query, completion: completion)
-//    }
-    
-//    static func fetchLancesObservable(in produto: Produto, completion: @escaping (Bool, [Lance]?) -> Void) {
-//        let databaseReference: DatabaseReference = Database.database().reference()
-//        let query = databaseReference.child(Lance.typeName).queryOrdered(byChild: "produtoId").queryEqual(toValue: produto.id)
-//        DataManager.shareInstance.queryObservable(query: query, completion: completion)
-//    }
-    
-//    static func fetchAllProdutosObservable(completion: @escaping (Bool, [Produto]?) -> Void) {
-//        DataManager.shareInstance.fetchObservable(typeName: Produto.typeName, completion: completion)
-//    }
-    
-//    static func fetchVendedorBy(id: String, completion: @escaping (Bool, Vendedor?) -> Void) {
-//        let databaseReference: DatabaseReference = Database.database().reference()
-//        let query = databaseReference.child(Vendedor.typeName).queryOrdered(byChild: "id").queryEqual(toValue: id)
-//
-//        DataManager.shareInstance.queryFirst(query: query, completion: completion)
-//    }
 
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Profile {
+class Profile {
 
     public private(set) var id: String?
 
@@ -17,7 +17,19 @@ struct Profile {
     public private(set) var lastName: String
     
     init(firstName: String, lastName: String) {
-        self.id = UUID().description
+        id = UUID().description
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+
+    required init?(_ fbObject: [String : Any]) {
+        guard let id = fbObject["id"] as? String else { return nil}
+        guard let accountId = fbObject["accountId"] as? String else { return nil}
+        guard let firstName = fbObject["firstName"] as? String else { return nil}
+        guard let lastName = fbObject["lastName"] as? String else { return nil}
+        
+        self.id = id
+        self.accountId = accountId
         self.firstName = firstName
         self.lastName = lastName
     }
@@ -33,24 +45,12 @@ extension Profile: CloudConvertible {
     func intoFBObject() -> [String : Any] {
         var fbObject = [String: Any]()
 
-        fbObject["id"] = self.id as Any
-        fbObject["accountId"] = self.accountId as Any
-        fbObject["firstName"] = self.firstName as Any
-        fbObject["lastName"] = self.lastName as Any
+        fbObject["id"] = id
+        fbObject["accountId"] = accountId
+        fbObject["firstName"] = firstName
+        fbObject["lastName"] = lastName
 
         return fbObject
-    }
-
-    init?(_ fbObject: [String : Any]) {
-        guard let id = fbObject["id"] as? String else { return nil}
-        guard let accountId = fbObject["accountId"] as? String else { return nil}
-        guard let firstName = fbObject["firstName"] as? String else { return nil}
-        guard let lastName = fbObject["lastName"] as? String else { return nil}
-
-        self.id = id
-        self.accountId = accountId
-        self.firstName = firstName
-        self.lastName = lastName
     }
 
 }

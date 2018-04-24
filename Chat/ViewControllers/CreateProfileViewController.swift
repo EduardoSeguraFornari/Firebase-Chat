@@ -42,7 +42,7 @@ class CreateProfileViewController: UIViewController {
             view.endEditing(true)
             DataAccess.save(with: profile) { (error, databaseReference) in
                 if error == nil {
-                    self.performSegue(withIdentifier: ChatsViewController.goToChatsFromCreateProfileSegue, sender: nil)
+                    self.performSegue(withIdentifier: UsersViewController.goToUsersFromCreateProfileSegue, sender: nil)
                 } else {
                     self.present(Alerts.simpleAlert(with: "Error Creating Profile"), animated: true)
                 }
@@ -54,7 +54,7 @@ class CreateProfileViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ChatsViewController.goToChatsFromCreateProfileSegue {
+        if segue.identifier == UsersViewController.goToUsersFromCreateProfileSegue {
             
         }
     }
