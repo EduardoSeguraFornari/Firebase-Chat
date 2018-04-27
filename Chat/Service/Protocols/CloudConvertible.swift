@@ -9,18 +9,21 @@
 import CloudKit
 
 protocol CloudConvertible: Equatable {
+
     static var typeName: String { get }
-    var id: String? { get }
+
+    var identifier: String? { get }
 
     func intoFBObject() -> [String: Any]
+
     init?(_ fbObject: [String: Any])
+
 }
 
 extension CloudConvertible {
 
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.identifier == rhs.identifier
     }
 
 }
-

@@ -9,12 +9,10 @@
 import UIKit
 
 class MessageTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var textUILabel: UILabel!
-    
     @IBOutlet weak var backgroundUIView: UIView!
-    
-    
+
     var message: Message! {
         didSet {
             textUILabel.text = message.text
@@ -23,7 +21,7 @@ class MessageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
+        selectionStyle = .none
         backgroundUIView.layer.cornerRadius = 5
     }
 

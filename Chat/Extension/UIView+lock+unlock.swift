@@ -51,4 +51,5 @@ extension UIView {
             self.viewWithTag(UIView.activityViewTag)?.removeFromSuperview()
         }
     }
+
 }
