@@ -6,7 +6,7 @@
 //  Copyright © 2018 Example. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Profile {
 
@@ -15,6 +15,8 @@ class Profile {
     public var accountId: String?
     public private(set) var firstName: String
     public private(set) var lastName: String
+
+    public var profilePicture: UIImage?
 
     // MARK: - Init
 

@@ -173,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3L-6I-rdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="889" y="278"/>
+            <point key="canvasLocation" x="889" y="314"/>
         </scene>
         <!--Chats-->
         <scene sceneID="nwp-Qn-yNI">
@@ -234,7 +234,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2N-8f-Z9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zxv-oA-cda" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4831.1999999999998" y="-15.742128935532236"/>
+            <point key="canvasLocation" x="6230" y="-16"/>
+        </scene>
+        <!--Create your profile-->
+        <scene sceneID="6FY-Wa-xk7">
+            <objects>
+                <viewController id="ZIM-Vy-gdJ" customClass="ChoosePhotoViewController" customModule="Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M5L-oy-OOd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cY9-Eu-fVX">
+                                <rect key="frame" x="19.5" y="424" width="335" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.41568627450000001" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cropButton:" destination="ZIM-Vy-gdJ" eventType="touchUpInside" id="MLF-Ia-Mqa"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="KfG-v3-raJ" customClass="CropPhotoUIView" customModule="Chat" customModuleProvider="target">
+                                <rect key="frame" x="87" y="204" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="PqO-QO-m9L"/>
+                                    <constraint firstAttribute="height" constant="200" id="mCZ-hs-zj7"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="defaultImage" value="default"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like to choose a profile picture?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqV-vd-IF7">
+                                <rect key="frame" x="20" y="136" width="335" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yqV-vd-IF7" firstAttribute="top" secondItem="HpV-eS-1dz" secondAttribute="top" constant="20" id="3Zk-vP-LrU"/>
+                            <constraint firstItem="cY9-Eu-fVX" firstAttribute="centerX" secondItem="KfG-v3-raJ" secondAttribute="centerX" id="7wS-lK-nrN"/>
+                            <constraint firstItem="KfG-v3-raJ" firstAttribute="top" secondItem="yqV-vd-IF7" secondAttribute="bottom" constant="20" id="Lye-X5-e9O"/>
+                            <constraint firstItem="cY9-Eu-fVX" firstAttribute="top" secondItem="KfG-v3-raJ" secondAttribute="bottom" constant="20" id="Pwl-s8-Fty"/>
+                            <constraint firstItem="HpV-eS-1dz" firstAttribute="trailing" secondItem="yqV-vd-IF7" secondAttribute="trailing" constant="20" id="R0R-of-xRB"/>
+                            <constraint firstItem="yqV-vd-IF7" firstAttribute="leading" secondItem="HpV-eS-1dz" secondAttribute="leading" constant="20" id="eIB-br-plV"/>
+                            <constraint firstItem="KfG-v3-raJ" firstAttribute="centerX" secondItem="HpV-eS-1dz" secondAttribute="centerX" id="fhe-zA-WQI"/>
+                            <constraint firstItem="cY9-Eu-fVX" firstAttribute="width" secondItem="yqV-vd-IF7" secondAttribute="width" id="n7y-4Z-aOu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HpV-eS-1dz"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create your profile" id="ZW4-ef-haI">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Jdv-BQ-MpR"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cropPhoto" destination="KfG-v3-raJ" id="Mcq-Nr-O9S"/>
+                        <segue destination="O6y-w2-j2j" kind="presentation" identifier="goToUsersFromCreateProfile" id="L6D-hF-0r6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLi-n8-jSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2788" y="313"/>
         </scene>
         <!--User-->
         <scene sceneID="o6O-N5-uyQ">
@@ -374,7 +441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANo-yd-vPx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6156" y="-359.37031484257875"/>
+            <point key="canvasLocation" x="7313" y="-374"/>
         </scene>
         <!--Users-->
         <scene sceneID="pTs-y3-IcZ">
@@ -441,7 +508,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NEu-hk-pt9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CuI-ct-TYA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4831.1999999999998" y="-876.61169415292363"/>
+            <point key="canvasLocation" x="6231" y="-877"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="eVE-tS-kJh">
@@ -460,7 +527,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lp-am-Wyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2788" y="-564"/>
+            <point key="canvasLocation" x="4137" y="-564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dpb-Ae-sod">
@@ -500,7 +567,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UW6-xU-aI0">
                                         <rect key="frame" x="20" y="120" width="335" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Create">
+                                        <state key="normal" title="Next">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -545,12 +612,12 @@
                         <outlet property="firstNameUITextField" destination="QgW-FV-bUw" id="10z-RR-70o"/>
                         <outlet property="lastNameUITextField" destination="18M-4v-Tly" id="yuq-yN-l2K"/>
                         <outlet property="scrollView" destination="vYG-Ob-Bsu" id="2hr-Zz-Tal"/>
-                        <segue destination="O6y-w2-j2j" kind="presentation" identifier="goToUsersFromCreateProfile" id="AjE-bN-nsI"/>
+                        <segue destination="ZIM-Vy-gdJ" kind="show" identifier="goToChoosePhotoFromCreateProfile" id="W6S-Mx-Bnl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJK-kP-hgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1988" y="315"/>
+            <point key="canvasLocation" x="1850" y="313"/>
         </scene>
         <!--Users-->
         <scene sceneID="Rd0-Ws-RhS">
@@ -569,7 +636,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhR-Ha-dvS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3892" y="-876.61169415292363"/>
+            <point key="canvasLocation" x="5191" y="-878"/>
         </scene>
         <!--Chats-->
         <scene sceneID="REf-gn-IHF">
@@ -588,15 +655,16 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ke6-ef-rTr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3892" y="-15.742128935532236"/>
+            <point key="canvasLocation" x="5191" y="-17"/>
         </scene>
     </scenes>
     <resources>
+        <image name="default" width="100" height="100"/>
         <image name="sendButton" width="53" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KRh-yt-RyY"/>
-        <segue reference="I8J-2e-ADU"/>
+        <segue reference="TNl-4u-t72"/>
+        <segue reference="L6D-hF-0r6"/>
         <segue reference="nb0-6s-1HP"/>
     </inferredMetricsTieBreakers>
 </document>

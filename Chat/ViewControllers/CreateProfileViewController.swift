@@ -45,24 +45,21 @@ class CreateProfileViewController: UIViewController {
             self.present(Alerts.simpleAlert(with: "Invalid a Last Name"), animated: true)
         } else {
             let profile = Profile(firstName: firstName, lastName: lastName)
-            view.lock()
-            view.endEditing(true)
-            DataAccess.sharedInstance.save(with: profile) { error in
-                if error == nil {
-                    DataAccess.sharedInstance.currentProfile = profile
-                    self.performSegue(withIdentifier: UsersViewController.goToUsersFromCreateProfileSegue, sender: nil)
-                } else {
-                    self.present(Alerts.simpleAlert(with: "Error Creating Profile"), animated: true)
-                }
-                self.view.unlock()
-            }
+            performSegue(withIdentifier: ChoosePhotoViewController.goToChoosePhotoFromCreateProfileSegue,
+                         sender: profile)
         }
     }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == UsersViewController.goToUsersFromCreateProfileSegue { }
+        if segue.identifier == ChoosePhotoViewController.goToChoosePhotoFromCreateProfileSegue {
+            if let destination = segue.destination as? ChoosePhotoViewController {
+                if let profile = sender as? Profile {
+                    destination.profile = profile
+                }
+            }
+        }
     }
 
 }
