@@ -155,23 +155,37 @@ class CropPhotoUIView: UIView {
 
             lastPointTouched = pointTouched
         } else {
-            print("-------------------------")
+            let timeToMove = 0.1
             if backgroundUIImageView.frame.origin.x > cropMarkUIImageView.frame.origin.x {
-                print("X ultrapassou na esquerda")
+                let difference = abs(backgroundUIImageView.frame.origin.x - cropMarkUIImageView.frame.origin.x)
+                UIView.animate(withDuration: timeToMove) {
+                    self.backgroundUIImageView.frame.origin.x -= difference
+                    self.cropUIImageView.frame.origin.x -= difference
+                }
             } else if backgroundUIImageView.frame.origin.x + backgroundUIImageView.frame.width <
                 cropMarkUIImageView.frame.origin.x + cropMarkUIImageView.frame.width {
-                print("X ultrapassou na direita")
-            } else {
-                print("X OK")
+                let difference = abs((backgroundUIImageView.frame.origin.x + backgroundUIImageView.frame.width) -
+                    (cropMarkUIImageView.frame.origin.x + cropMarkUIImageView.frame.width))
+                UIView.animate(withDuration: timeToMove) {
+                    self.backgroundUIImageView.frame.origin.x += difference
+                    self.cropUIImageView.frame.origin.x += difference
+                }
             }
 
             if backgroundUIImageView.frame.origin.y > cropMarkUIImageView.frame.origin.y {
-                print("X ultrapassou em cima")
+                let difference = abs(backgroundUIImageView.frame.origin.y - cropMarkUIImageView.frame.origin.y)
+                UIView.animate(withDuration: timeToMove) {
+                    self.backgroundUIImageView.frame.origin.y -= difference
+                    self.cropUIImageView.frame.origin.y -= difference
+                }
             } else if backgroundUIImageView.frame.origin.y + backgroundUIImageView.frame.height <
                 cropMarkUIImageView.frame.origin.y + cropMarkUIImageView.frame.height {
-                print("X ultrapassou em baixo")
-            } else {
-                print("Y OK")
+                let difference = abs((backgroundUIImageView.frame.origin.y + backgroundUIImageView.frame.height) -
+                    (cropMarkUIImageView.frame.origin.y + cropMarkUIImageView.frame.height))
+                UIView.animate(withDuration: timeToMove) {
+                    self.backgroundUIImageView.frame.origin.y += difference
+                    self.cropUIImageView.frame.origin.y += difference
+                }
             }
 
             lastPointTouched = nil
